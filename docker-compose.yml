@@ -25,7 +25,7 @@ services:
         env_file:
             - .env
         volumes:
-            - sample_project_db_data:/var/lib/postgresql/data
+            - sample_db_data:/var/lib/postgresql/data
         ports:
             - 5432:5423
         healthcheck:
@@ -51,7 +51,7 @@ services:
         ports:
             - 8080:80
 volumes:
-    sample_project_db_data:
+    sample_db_data:
         driver: local
     sample_project_pgadmin_data:
         driver: local
