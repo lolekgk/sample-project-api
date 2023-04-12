@@ -415,7 +415,7 @@ requests-oauthlib = ">=0.3.0"
 name = "django-debug-toolbar"
 version = "4.0.0"
 description = "A configurable set of panels that display various debug information about the current request/response."
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.8"
 files = [
@@ -1161,4 +1161,4 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "493ade19a2bf3ede88767b2ccd3add26a3319c23b3d5804e2e773fc7bb46660d"
+content-hash = "13a397024b5820ad0f631f02e470e2c6462f95e63776bfa40388acdca3725320"
