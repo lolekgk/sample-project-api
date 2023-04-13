@@ -14,14 +14,32 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from dj_rest_auth.jwt_auth import get_refresh_view
+from dj_rest_auth.registration.views import (
+    ConfirmEmailView,
+    RegisterView,
+    VerifyEmailView,
+)
+from dj_rest_auth.views import (
+    LoginView,
+    LogoutView,
+    PasswordChangeView,
+    PasswordResetConfirmView,
+    PasswordResetView,
+)
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path, re_path
+from drf_spectacular.views import (
+    SpectacularAPIView,
+    SpectacularRedocView,
+    SpectacularSwaggerView,
+)
+from rest_framework_simplejwt.views import TokenVerifyView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-<<<<<<< Updated upstream
-]
-=======
     # apps endpoints
     path("books/", include("books.urls")),
     # swagger endpoints
@@ -81,4 +99,3 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns.append(path("__debug__/", include("debug_toolbar.urls")))
->>>>>>> Stashed changes

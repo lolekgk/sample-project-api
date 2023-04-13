@@ -25,11 +25,7 @@ services:
         env_file:
             - .env
         volumes:
-<<<<<<< Updated upstream
-            - sample_project_db_data:/var/lib/postgresql/data
-=======
             - books_db_data:/var/lib/postgresql/data
->>>>>>> Stashed changes
         ports:
             - 5432:5423
         healthcheck:
@@ -55,11 +51,7 @@ services:
         ports:
             - 8080:80
 volumes:
-<<<<<<< Updated upstream
-    sample_project_db_data:
-=======
     books_db_data:
->>>>>>> Stashed changes
         driver: local
     sample_project_pgadmin_data:
         driver: local

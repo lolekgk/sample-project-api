@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
+from datetime import timedelta
 from pathlib import Path
 
 import dj_database_url
@@ -46,8 +47,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # third party apps
     "rest_framework",
-<<<<<<< Updated upstream
-=======
     "rest_framework.authtoken",
     "rest_framework_simplejwt.token_blacklist",
     "allauth",
@@ -58,7 +57,6 @@ INSTALLED_APPS = [
     "drf_spectacular",
     # local apps
     "books",
->>>>>>> Stashed changes
 ]
 
 MIDDLEWARE = [
@@ -137,8 +135,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-<<<<<<< Updated upstream
-=======
 
 
 SPECTACULAR_SETTINGS = {
@@ -214,4 +210,3 @@ if DEBUG:
         "127.0.0.1",
         "10.0.2.2",
     ]
->>>>>>> Stashed changes
