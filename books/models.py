@@ -62,3 +62,11 @@ class Book(models.Model):
 
     def __str__(self) -> str:
         return self.title
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["title", "author", "publication_date"],
+                name="unique_book",
+            )
+        ]
