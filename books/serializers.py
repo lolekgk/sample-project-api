@@ -5,7 +5,11 @@ from dj_rest_auth.serializers import (
     UserDetailsSerializer as BaseUserDetailsSerializer,
 )
 from django.contrib.auth import get_user_model
-from drf_writable_nested.mixins import NestedCreateMixin
+from drf_writable_nested.mixins import (
+    NestedCreateMixin,
+    NestedUpdateMixin,
+    UniqueFieldsMixin,
+)
 from rest_framework import serializers
 
 from .constants import UserType
@@ -36,13 +40,13 @@ class RegisterSerializer(BaseRegisterSerializer):
         return user
 
 
-class AuthorSerializer(serializers.ModelSerializer):
+class AuthorSerializer(UniqueFieldsMixin, serializers.ModelSerializer):
     class Meta:
         model = Author
-        fields = ["id", "first_name", "last_name"]
+        fields = ["id", "first_name", "last_name", "id_number"]
 
 
-class GenreSeralizer(serializers.ModelSerializer):
+class GenreSeralizer(UniqueFieldsMixin, serializers.ModelSerializer):
     class Meta:
         model = Genre
         fields = ["id", "name"]
@@ -75,12 +79,13 @@ class BookListCreateSerializer(NestedCreateMixin, serializers.ModelSerializer):
             "owner",
         ]
 
+    def create(self, validated_data):
+        return Book.objects.get_or_create(**validated_data)
 
-class BookUpdateSerializer(serializers.ModelSerializer):
-    genres = serializers.PrimaryKeyRelatedField(
-        queryset=Genre.objects.all(), many=True
-    )
-    author = serializers.PrimaryKeyRelatedField(queryset=Author.objects.all())
+
+class BookUpdateSerializer(NestedUpdateMixin, serializers.ModelSerializer):
+    genres = GenreSeralizer(many=True)
+    author = AuthorSerializer()
 
     class Meta:
         model = Book
@@ -92,6 +97,29 @@ class BookUpdateSerializer(serializers.ModelSerializer):
             "publication_date",
             "owner",
         ]
+
+    def update(self, instance, validated_data):
+        author_data = validated_data.pop("author", None)
+        genres_data = validated_data.pop("genres", [])
+
+        if author_data:
+            author, created = Author.objects.get_or_create(**author_data)
+            instance.author = author
+
+        if genres_data:
+            instance.genres.clear()  # Remove existing genres to avoid duplicates
+            for genre_data in genres_data:
+                # Check if genre with given name already exists
+                name = genre_data.get("name")
+                genre = Genre.objects.filter(name=name).first()
+
+                if not genre:
+                    # If genre doesn't exist, create a new one
+                    genre = Genre.objects.create(name=name)
+
+                instance.genres.add(genre)
+
+        return super().update(instance, validated_data)
 
 
 class UserDetailsSerializer(BaseUserDetailsSerializer):

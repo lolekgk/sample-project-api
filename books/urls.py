@@ -17,7 +17,7 @@ urlpatterns = [
         name="book_update_as_owner",
     ),
     path(
-        "create-as-admin/",
+        "create_record/",
         BookCreateView.as_view(),
         name="book_create_as_admin",
     ),

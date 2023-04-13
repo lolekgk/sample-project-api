@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
@@ -30,6 +29,7 @@ class User(AbstractUser):
 class Author(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
+    id_number = models.CharField(max_length=55, unique=True)
 
     def __str__(self) -> str:
         return f"{self.first_name} {self.last_name}"
@@ -40,6 +40,11 @@ class Genre(models.Model):
 
     def __str__(self) -> str:
         return self.name
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=["name"], name="unique_genre_name")
+        ]
 
 
 class Book(models.Model):

@@ -1,4 +1,3 @@
-from django.db.models import Prefetch
 from rest_framework.generics import CreateAPIView, ListAPIView, UpdateAPIView
 from rest_framework.permissions import IsAdminUser
 
