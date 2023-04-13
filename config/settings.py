@@ -15,14 +15,18 @@ from pathlib import Path
 
 import dj_database_url
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
+MEDIA_URL = "images/"
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+
+STATIC_ROOT = BASE_DIR / STATIC_URL
+MEDIA_ROOT = STATIC_ROOT / MEDIA_URL
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -99,7 +103,6 @@ DATABASES = {
     )
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -165,7 +168,6 @@ REST_AUTH = {
     "JWT_AUTH_REFRESH_COOKIE": "refresh_token_sample_project",
     "USER_DETAILS_SERIALIZER": "books.serializers.UserDetailsSerializer",
     "OLD_PASSWORD_FIELD_ENABLED": True,
-    "REGISTER_PERMISSION_CLASSES": ("rest_framework.permissions.IsAdminUser",),
     "REGISTER_SERIALIZER": "books.serializers.RegisterSerializer",
 }
 
@@ -179,7 +181,7 @@ ACCOUNT_EMAIL_VERIFICATION = "none"
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
-ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = "/blog/"
+ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = "/books/"
 LOGIN_URL = "/auth/login/"
 
 # Email backend config
