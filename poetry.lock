@@ -558,6 +558,17 @@ offline = ["drf-spectacular-sidecar"]
 sidecar = ["drf-spectacular-sidecar"]
 
 [[package]]
+name = "drf-writable-nested"
+version = "0.7.0"
+description = "Writable nested helpers for django-rest-framework's serializers"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "drf_writable_nested-0.7.0-py3-none-any.whl", hash = "sha256:154c0381e8a3a477e0fd539d5e1caf8ff4c1097a9c0c0fe741d4858b11b0455b"},
+]
+
+[[package]]
 name = "idna"
 version = "3.4"
 description = "Internationalized Domain Names in Applications (IDNA)"
@@ -1081,4 +1092,8 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
+<<<<<<< Updated upstream
 content-hash = "0e4cdf227065d552c7317b5fad6dc168a360fb2843bfa8844d29cf1d34fde4eb"
+=======
+content-hash = "b90072a125cce70280379b8bf672bf7064901d5c2456290f3e6f7ca8f71a5093"
+>>>>>>> Stashed changes
