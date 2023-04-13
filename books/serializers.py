@@ -79,9 +79,6 @@ class BookListCreateSerializer(NestedCreateMixin, serializers.ModelSerializer):
             "owner",
         ]
 
-    def create(self, validated_data):
-        return Book.objects.get_or_create(**validated_data)
-
 
 class BookUpdateSerializer(NestedUpdateMixin, serializers.ModelSerializer):
     genres = GenreSeralizer(many=True)
@@ -107,14 +104,12 @@ class BookUpdateSerializer(NestedUpdateMixin, serializers.ModelSerializer):
             instance.author = author
 
         if genres_data:
-            instance.genres.clear()  # Remove existing genres to avoid duplicates
+            instance.genres.clear()
             for genre_data in genres_data:
-                # Check if genre with given name already exists
                 name = genre_data.get("name")
                 genre = Genre.objects.filter(name=name).first()
 
                 if not genre:
-                    # If genre doesn't exist, create a new one
                     genre = Genre.objects.create(name=name)
 
                 instance.genres.add(genre)
