@@ -23,6 +23,7 @@ class BookCreateView(CreateAPIView):
 
 
 class BookUpdateView(UpdateAPIView):
+    http_method_names = ["patch"]
     queryset = Book.objects.all()
     serializer_class = BookUpdateSerializer
     permission_classes = [IsBookOwner]
